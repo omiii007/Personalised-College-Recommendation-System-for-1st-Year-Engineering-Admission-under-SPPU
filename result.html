@@ -1,0 +1,53 @@
+{% extends 'base1.html' %}
+{% block style %} 
+
+{% endblock style %} 
+
+{% block title %}Prediction{% endblock title %}
+
+{% block body %}
+<div class="container my-4">
+</div>
+<div class="container py-5">
+    <div class="card mb-4">
+        <div class="card-body p-5">
+            <h4 class="mb-4" style="font-size:50px; text-align:center; font-size:200%;">Predicted Colleges as per the Details</h4><br>
+            <!-- <h4 class="mb-4" style="font-size:50px;color:red; text-align:center; font-size:150%;">{{ans}}</h4><br><hr> -->
+            <h4 class="mb-4" style="font-size:50px;color:black; font-size:150%;">Matching Colleges List : </h4><br>
+
+
+            {% if matching_data is not None and not matching_data.empty %}
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">College Name</th>
+                        <th scope="col">MHT-CET Percentile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in matching_data.iterrows %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ category_upper }}</td>
+                            <td>{{ department_upper }}</td>
+                            <td>{{ row.Collage_name }}</td>
+                            <td>{{ row.MHT_CET_Percentile }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="font-italic">
+                <h1 style="font-size:50px; color:blue; text-align:center; font-size:300%;">No colleges found</h1>
+            </p>
+        {% endif %}
+        
+    </div>
+</div>
+</div>
+
+{% endblock body %}

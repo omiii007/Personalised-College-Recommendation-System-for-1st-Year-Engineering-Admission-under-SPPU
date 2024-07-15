@@ -1,0 +1,95 @@
+{% extends 'base1.html' %}
+{% block style %}
+
+{% endblock style %}
+
+{% block title %}College Recommendation System for 1st Year Students{% endblock title %}
+
+{% block body %}
+
+<script>
+    function validateForm() {
+        var dropdown = document.getElementById("browsers");
+        var selectedOption = dropdown.options[dropdown.selectedIndex].value;
+        if (selectedOption === "DEFAULT") {
+            alert("Please select a Category.");
+            return false; // Prevent form submission
+        }
+
+        dropdown = document.getElementById("browsers1");
+        selectedOption = dropdown.options[dropdown.selectedIndex].value;
+        if (selectedOption === "DEFAULT") {
+            alert("Please select a Department.");
+            return false; // Prevent form submission
+        }
+
+
+        var mhtCetPercentile = document.getElementsByName("MHT_CET_Percentile")[0].value;
+        if (mhtCetPercentile.trim() === "") {
+            alert("Please enter MHT-CET Percentile.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Form is valid, allow submission
+    }
+</script>
+
+<div class="container">
+    <br>
+    <center><h1 style='color:white'><b>Enter Student Details</b></h1></center>
+    <br><br><br>
+    <div class="row">
+      
+        <div class="col-sm-6" style='background-color:white;margin-left:350px'>
+            <br>
+            <form action="result" method="POST" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="Category">Category</label>
+                    <select id="browsers" class="form-control" name="Category" required>
+                        <option value='DEFAULT' selected disabled>--Select--</option>
+                        <option value='OPEN'>OPEN</option>
+                        <option value='OBC'>OBC</option>
+                        <option value='NT'>NT</option>
+                        <option value='VJNT'>VJNT</option>
+                        <option value='ST'>ST</option>
+                        <option value='SC'>SC</option>
+                        <option value='EWS'>EWS</option>
+                        <option value='TFWS'>TFWS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="browsers1" class="form-control" name="department" required>
+                        <option value='DEFAULT' selected disabled>--Select--</option>
+                        <option value='Computer Engineering'>Computer Engineering</option>
+                        <option value='Civil Engineering'>Civil Engineering</option>
+                        <option value='Mechanical Engineering'>Mechanical Engineering</option>
+                        <option value='Information Technology'>Information Technology</option>
+                        <option value='Electronics and TeleCommunication Engineering'>Electronics and TeleCommunication Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Year">Year</label>
+                    <select class="form-control" name="Year" required>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="MHT_CET_Percentile">MHT-CET Percentile</label>
+                    <input type="text" class="form-control" name="MHT_CET_Percentile" placeholder="" required>
+                </div>
+                <center>
+                    <br>
+                    <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModal">Submit
+                    </button>
+
+                </center>
+            </form>
+            <br>
+        </div>
+    </div><br>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>{% block title %}{% endblock %} |  Website</title>
+    </head>
+    {% block style %}{% endblock %}
+    <body>
+        <nav class="border-b bg-gray-600 border-gray-300">
+            <div class="max-w-6xl mx-auto py-2 bg-gray-600 px-6 xl:px-0 flex items-center justify-between">
+                <div class="menu-left flex items-center space-x-6">
+                    <a href="/" class="py-4 text-lg text-white font-semibold">College Recommendation System For 1st Year Students</a>
+
+                    <ul class="flex items-center space-x-4">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="hover:bg-green-600  text-white px-2 py-2 rounded-xl" href="{% url 'input' %}">Predication</a>
+                            </li>
+                            
+                            <li><a href="{% url 'logout' %}" class="hover:bg-green-600  text-white px-2 py-2 rounded-xl">Logout</a></li>
+                            
+                        {% else %}
+                            <li><a href="{% url 'login' %}" class="hover:bg-green-600 text-white  px-2 py-2 rounded-xl">LogIn</a></li>
+                            <li><a href="{% url 'signup' %}" class="hover:bg-green-600 text-white  px-2 py-2 rounded-xl">SignUp</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <main class="bg-blue-100">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="bg-gray-600">
+            <div class="max-w-6xl mx-auto py-10 px-6 xl:px-0 md:flex justify-between">
+                <div class="footer-left mb-12 md:mb-0">
+                    <h2 class="mb-5 uppercase text-lg text-white">About us</h2>
+                    <p class="text-white">"Our college recommendation project aims to simplify the daunting task of choosing the right college by providing 
+                        <br>personalized recommendations tailored to each student's unique preferences and academic goals. Leveraging advanced 
+                        <br>algorithms and comprehensive data analysis, our platform offers insights into colleges' majors, admission requirements,
+                        <br>campus life, and more. With a user-friendly interface and access to a wealth of information, students can make informed
+                        <br>decisions about their future educational endeavors, ensuring a seamless transition into higher education. 
+                        <br>Join us in exploring the possibilities and unlocking the potential for a bright academic future!"</p>
+                </div>
+
+                <div class="footer-right">
+                    <h2 class="mb-5 uppercase text-lg text-white">Social links</h2>
+
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white hover:text-green-600">Facebook</a></li>
+                        <li><a href="#" class="text-white hover:text-green-600">Twitter</a></li>
+                        <li><a href="#" class="text-white hover:text-green-600">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://unpkg.com/hyperscript@2.2.0/dist/hyperscript.js"></script>
+
+        
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>
